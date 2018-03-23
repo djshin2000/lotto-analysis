@@ -27,9 +27,7 @@ SECRET_DIR = os.path.join(ROOT_DIR, '.secrets')
 # /.secrets/base.json
 SECRET_BASE = os.path.join(SECRET_DIR, 'base.json')
 
-f = open(SECRET_BASE, 'rt')
-base_text = f.read()
-f.close()
+base_text = open(SECRET_BASE, 'rt').read()
 secrets_base = json.loads(base_text)
 SECRET_KEY = secrets_base['SECRET_KEY']
 

@@ -1,11 +1,12 @@
 import datetime
 import os
 import re
-
 import requests
+
 from bs4 import BeautifulSoup
-from django.conf import settings
-# from config import settings
+# from django.conf import settings
+from config import settings
+
 
 DATA_DIR = os.path.join(settings.ROOT_DIR, '.data')
 FILE_PATH = os.path.join(DATA_DIR, f'naver_lotto_result.html')
@@ -32,7 +33,7 @@ class LottoNumberData:
         # --------실제 크롤링 할 때 사용해야 하는 구문----------
         # url = f'http://search.naver.com/search.naver'
         # params = {
-        #     'query': self.draw + '회로또'
+        #     'query': '로또'
         # }
         # response = requests.get(url, params)
         # source = response.text
@@ -61,6 +62,8 @@ class LottoNumberData:
                 self.bonus_num = number
             else:
                 self.win_num_list.append(number)
+
+        print(f'get data~~ : {datetime.datetime.now()}')
 
 
 # test = LottoNumberData()

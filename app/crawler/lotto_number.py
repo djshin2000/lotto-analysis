@@ -4,8 +4,8 @@ import re
 
 import requests
 from bs4 import BeautifulSoup
-# from django.conf import settings
-from config import settings
+from django.conf import settings
+# from config import settings
 
 DATA_DIR = os.path.join(settings.ROOT_DIR, '.data')
 FILE_PATH = os.path.join(DATA_DIR, f'naver_lotto_result.html')
@@ -49,7 +49,6 @@ class LottoNumberData:
         self.draw = re.search(r'\d*', str_draw).group()
         str_date = lotto_tit.select_one('span').get_text()
         self.date = datetime.datetime.strptime(str_date, '%Y.%m.%d').date()
-        # print('type(self.date) ----> ', type(self.date))
 
         num_box = lotto_wrap.select_one('.num_box')
         num_list = []
@@ -64,10 +63,10 @@ class LottoNumberData:
                 self.win_num_list.append(number)
 
 
-test = LottoNumberData()
-test.get_data()
-print(test.draw)
-print(test.date)
-print(test.win_num_list)
-print(test.bonus_num)
+# test = LottoNumberData()
+# test.get_data()
+# print(test.draw)
+# print(test.date)
+# print(test.win_num_list)
+# print(test.bonus_num)
 # test.get_data_and_save_file('790')

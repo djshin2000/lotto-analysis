@@ -4,9 +4,9 @@ from crawler.lotto_number import LottoNumberData
 
 
 class LottoNumberManager(models.Manager):
-    def update_or_create_from_naver(self):
+    def update_or_create_from_naver(self, draw):
         lotto_number_data = LottoNumberData()
-        lotto_number_data.get_data()
+        lotto_number_data.get_data(draw=draw)
         draw = lotto_number_data.draw
         win_number_list = lotto_number_data.win_num_list
         bonus_number = lotto_number_data.bonus_num

@@ -23,23 +23,24 @@ class LottoNumberData:
         with open(FILE_PATH, 'wt') as f:
             url = f'http://search.naver.com/search.naver'
             params = {
-                'query': draw + '회로또'
+                'query': str(draw) + '회로또'
             }
             response = requests.get(url, params)
             source = response.text
             f.write(source)
 
-    def get_data(self):
+    def get_data(self, draw):
         # --------실제 크롤링 할 때 사용해야 하는 구문----------
-        # url = f'http://search.naver.com/search.naver'
-        # params = {
-        #     'query': '로또'
-        # }
-        # response = requests.get(url, params)
-        # source = response.text
+        url = f'http://search.naver.com/search.naver'
+        params = {
+            'query': str(draw) + '회로또'
+        }
+        response = requests.get(url, params)
+        source = response.text
+        # ----------------------------------------------
 
         # --------저장된 파일을 읽을 때 사용하는 구문----------
-        source = open(FILE_PATH, 'rt').read()
+        # source = open(FILE_PATH, 'rt').read()
         # ----------------------------------------------
 
         soup = BeautifulSoup(source, 'lxml')

@@ -1,9 +1,8 @@
 from django.core.management import BaseCommand
 
-from crawler.lotto_number import LottoNumberData
+from lotto.models import LottoNumber
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        lotto_num = LottoNumberData()
-        lotto_num.get_data()
+        LottoNumber.objects.update_or_create_from_naver()

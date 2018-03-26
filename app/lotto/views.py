@@ -50,6 +50,61 @@ def get_number_frequency(request):
     return render(request, 'number-frequency.html', context)
 
 
+def search_results_number_draw(request):
+    if request.method == 'POST':
+        draw_from = request.POST['draw_from']
+        draw_to = request.POST['draw_to']
+
+        date = 0
+        result_list = []
+        for draw_index in range(int(draw_from), int(draw_to) + 1):
+            lotto_numbers = LottoNumber.objects.filter(draw=draw_index, is_bonus_number=False)
+            winning_num = []
+            odd_even = []
+            group_1_10 = 0
+            group_11_20 = 0
+            group_21_30 = 0
+            group_31_40 = 0
+            group_41_50 = 0
+            for lotto_num in lotto_numbers:
+                winning_num.append(str(lotto_num.winning_number))
+                date = lotto_num.date
+                odd_even.append(lotto_num.odd_even)
+                if lotto_num.group == '1~10':
+                    group_1_10 += 1
+                elif lotto_num.group == '11~20':
+                    group_11_20 += 1
+                elif lotto_num.group == '21~30':
+                    group_21_30 += 1
+                elif lotto_num.group == '31~40':
+                    group_31_40 += 1
+                elif lotto_num.group == '41~50':
+                    group_41_50 += 1
+            # print(','.join(winning_num))
+            odd_cnt = odd_even.count('odd')
+            even_cnt = odd_even.count('even')
+            bonus_numbers = LottoNumber.objects.filter(draw=draw_index, is_bonus_number=True)
+            # print(bonus_numbers[0].winning_number)
+            data = {
+                'draw': draw_index,
+                'date': date,
+                'winning_num': ','.join(winning_num),
+                'bonus_num': bonus_numbers[0].winning_number,
+                'odd_even': f'홀수:{odd_cnt} / 짝수:{even_cnt}',
+                'group_1_10': group_1_10,
+                'group_11_20': group_11_20,
+                'group_21_30': group_21_30,
+                'group_31_40': group_31_40,
+                'group_41_50': group_41_50,
+            }
+            result_list.append(data)
+        context = {
+            'result_list': result_list,
+        }
+        return render(request, 'search-results-draw.html', context)
+    return render(request, 'search-results-draw.html')
+
+
 def lotto_number_list(request):
     lotto_num_list = LottoNumber.objects.all()
     context = {

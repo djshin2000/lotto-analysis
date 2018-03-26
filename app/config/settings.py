@@ -22,6 +22,11 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 # templates 폴더 경로 설정
 TEMPLATES_DIRS = os.path.join(BASE_DIR, 'templates')
 
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
+
 # /.secrets
 SECRET_DIR = os.path.join(ROOT_DIR, '.secrets')
 # /.secrets/base.json

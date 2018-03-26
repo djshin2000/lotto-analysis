@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>{{ draw_max }}회차</h2>
-  <h2>{{ last_draw_date }}</h2>
-  <ul>
+  <!--<h2>{{ draw_max }}회차</h2>-->
+  <!--<h2>{{ last_draw_date }}</h2>-->
+  <!--<ul>-->
+    <!--{% for lotto_num in last_win_num_list %}-->
+      <!--<li>{{ lotto_num }}</li>-->
+    <!--{% endfor %}-->
+      <!--<li>보너스번호:{{ last_bonus_num }}</li>-->
+  <!--</ul>-->
+
+<ul class="list-group">
+  <li class="list-group-item">{{ draw_max }}회차</li>
+  <li class="list-group-item">추첨일: {{ last_draw_date }}</li>
+  <li class="list-group-item">당첨번호:
     {% for lotto_num in last_win_num_list %}
-      <li>{{ lotto_num }}</li>
-    {% endfor %}
-      <li>보너스번호:{{ last_bonus_num }}</li>
-  </ul>
+      {{ lotto_num }},
+    {% endfor %}</li>
+  <li class="list-group-item">보너스번호:{{ last_bonus_num }}</li>
+</ul>
 
   <!--<a href="">추가하기</a>-->
 {% endblock %}
